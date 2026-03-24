@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Search, ShoppingCart, User, Menu, X, ChevronRight, ArrowLeft } from "lucide-react";
+import { Search, ShoppingCart, User, Menu, X, Plus, Minus } from "lucide-react";
 
 const navCategories = [
   {

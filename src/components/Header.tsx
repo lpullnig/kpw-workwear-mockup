@@ -69,9 +69,6 @@ const CategoryItem = ({ category, isOpen, onToggle, onHover }: CategoryItemProps
         >
           {category.label}
         </a>
-        {category.count && (
-          <span className="text-[11px] text-foreground/25 ml-2">{category.count}</span>
-        )}
       </div>
 
       {/* Subcategories — expand on hover/click */}
@@ -79,17 +76,11 @@ const CategoryItem = ({ category, isOpen, onToggle, onHover }: CategoryItemProps
         <div className="pb-2 animate-in fade-in slide-in-from-top-1 duration-200">
           {category.subcategories.map((sub) => (
             <a
-              key={typeof sub === "string" ? sub : sub.label}
+              key={sub}
               href="#"
-              className="flex items-center gap-2 pl-11 pr-5 py-2 text-sm text-foreground/50 hover:text-foreground transition-colors"
+              className="block pl-11 pr-5 py-2 text-sm text-foreground/50 hover:text-foreground transition-colors"
             >
-              {typeof sub === "string" ? sub : (
-                <>
-                  {sub.expandable && <Plus className="w-3 h-3 text-foreground/30" />}
-                  <span>{sub.label}</span>
-                  {sub.count && <span className="text-[11px] text-foreground/20 ml-auto">{sub.count}</span>}
-                </>
-              )}
+              {sub}
             </a>
           ))}
         </div>

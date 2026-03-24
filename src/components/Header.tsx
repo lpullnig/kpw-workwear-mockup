@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { Search, ShoppingCart, User, Menu, X, ChevronRight, ArrowLeft } from "lucide-react";
+import { Search, ShoppingCart, User, Menu, X, Plus, Minus } from "lucide-react";
 
 const navCategories = [
   {
@@ -33,6 +33,61 @@ const navCategories = [
     subcategories: ["Gürtel", "Knieschoner", "Socken", "Taschen"],
   },
 ];
+
+interface CategoryItemProps {
+  category: (typeof navCategories)[number];
+  isOpen: boolean;
+  onToggle: () => void;
+  onHover: () => void;
+}
+
+const CategoryItem = ({ category, isOpen, onToggle, onHover }: CategoryItemProps) => {
+  const hasSubcategories = category.subcategories.length > 0;
+
+  return (
+    <div onMouseEnter={onHover}>
+      {/* Category row */}
+      <div className="flex items-center px-5 py-3 hover:bg-card transition-colors">
+        {hasSubcategories && (
+          <button
+            onClick={onToggle}
+            className="mr-2 text-foreground/40 hover:text-foreground transition-colors"
+            aria-label={isOpen ? "Schließen" : "Öffnen"}
+          >
+            {isOpen ? (
+              <Minus className="w-3.5 h-3.5" />
+            ) : (
+              <Plus className="w-3.5 h-3.5" />
+            )}
+          </button>
+        )}
+        <a
+          href={category.href}
+          className={`flex-1 text-[13px] font-bold uppercase tracking-wide transition-colors ${
+            isOpen ? "text-foreground" : "text-foreground/70 hover:text-foreground"
+          }`}
+        >
+          {category.label}
+        </a>
+      </div>
+
+      {/* Subcategories — expand on hover/click */}
+      {isOpen && hasSubcategories && (
+        <div className="pb-2 animate-in fade-in slide-in-from-top-1 duration-200">
+          {category.subcategories.map((sub) => (
+            <a
+              key={sub}
+              href="#"
+              className="block pl-11 pr-5 py-2 text-sm text-foreground/50 hover:text-foreground transition-colors"
+            >
+              {sub}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -150,7 +205,7 @@ const Header = () => {
         )}
       </header>
 
-      {/* Full-screen navigation overlay — Strauss-style flyout */}
+      {/* Full-screen navigation overlay */}
       {menuOpen && (
         <div className="fixed inset-0 z-40 flex" style={{ top: "calc(3.5rem + 33px)" }}>
           {/* Backdrop */}
@@ -159,75 +214,37 @@ const Header = () => {
             onClick={() => setMenuOpen(false)}
           />
 
-          {/* Nav panel */}
+          {/* Nav panel — single list with hover/click expand */}
           <div className="relative w-full max-w-sm bg-background border-r border-border/40 h-full overflow-y-auto animate-in slide-in-from-left-4 duration-300">
-            {activeCategory === null ? (
-              /* Main category list */
-              <nav className="py-2">
-                <div className="px-5 py-4">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/30">
-                    Kategorien
-                  </p>
-                </div>
-                {navCategories.map((cat, i) => (
-                  <button
-                    key={cat.label}
-                    onClick={() => setActiveCategory(i)}
-                    className="w-full flex items-center justify-between px-5 py-3.5 text-sm font-semibold text-foreground/80 hover:text-foreground hover:bg-card transition-colors"
-                  >
-                    <span className="uppercase tracking-wide text-[13px]">{cat.label}</span>
-                    <ChevronRight className="w-4 h-4 text-foreground/25" />
-                  </button>
-                ))}
-
-                <div className="mx-5 my-4 h-px bg-border/40" />
-
-                <a href="#" className="block px-5 py-3 text-[13px] font-semibold uppercase tracking-wide text-primary hover:text-primary/80 transition-colors">
-                  Alle Produkte
-                </a>
-                <a href="#" className="block px-5 py-3 text-[13px] font-semibold uppercase tracking-wide text-foreground/50 hover:text-foreground transition-colors">
-                  Neuheiten
-                </a>
-                <a href="#" className="block px-5 py-3 text-[13px] font-semibold uppercase tracking-wide text-foreground/50 hover:text-foreground transition-colors">
-                  Sale
-                </a>
-              </nav>
-            ) : (
-              /* Subcategory view */
-              <div className="py-2">
-                <button
-                  onClick={() => setActiveCategory(null)}
-                  className="flex items-center gap-2 px-5 py-4 text-foreground/50 hover:text-foreground transition-colors w-full"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em]">Zurück</span>
-                </button>
-
-                <div className="px-5 pb-3">
-                  <h3 className="text-lg font-black uppercase tracking-tight">
-                    {navCategories[activeCategory].label}
-                  </h3>
-                  <div className="w-8 h-[2px] bg-primary mt-2" />
-                </div>
-
-                <a
-                  href={navCategories[activeCategory].href}
-                  className="block px-5 py-3 text-[13px] font-semibold text-primary hover:text-primary/80 transition-colors"
-                >
-                  Alle anzeigen
-                </a>
-
-                {navCategories[activeCategory].subcategories.map((sub) => (
-                  <a
-                    key={sub}
-                    href="#"
-                    className="block px-5 py-3 text-sm text-foreground/60 hover:text-foreground hover:bg-card transition-colors"
-                  >
-                    {sub}
-                  </a>
-                ))}
+            <nav className="py-2">
+              <div className="px-5 py-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-foreground/30">
+                  Kategorien
+                </p>
               </div>
-            )}
+
+              {navCategories.map((cat, i) => (
+                <CategoryItem
+                  key={cat.label}
+                  category={cat}
+                  isOpen={activeCategory === i}
+                  onToggle={() => setActiveCategory(activeCategory === i ? null : i)}
+                  onHover={() => setActiveCategory(i)}
+                />
+              ))}
+
+              <div className="mx-5 my-4 h-px bg-border/40" />
+
+              <a href="#" className="block px-5 py-3 text-[13px] font-semibold uppercase tracking-wide text-primary hover:text-primary/80 transition-colors">
+                Alle Produkte
+              </a>
+              <a href="#" className="block px-5 py-3 text-[13px] font-semibold uppercase tracking-wide text-foreground/50 hover:text-foreground transition-colors">
+                Neuheiten
+              </a>
+              <a href="#" className="block px-5 py-3 text-[13px] font-semibold uppercase tracking-wide text-foreground/50 hover:text-foreground transition-colors">
+                Sale
+              </a>
+            </nav>
           </div>
         </div>
       )}

@@ -34,6 +34,70 @@ const navCategories = [
   },
 ];
 
+interface CategoryItemProps {
+  category: (typeof navCategories)[number];
+  isOpen: boolean;
+  onToggle: () => void;
+  onHover: () => void;
+}
+
+const CategoryItem = ({ category, isOpen, onToggle, onHover }: CategoryItemProps) => {
+  const hasSubcategories = category.subcategories.length > 0;
+
+  return (
+    <div onMouseEnter={onHover}>
+      {/* Category row */}
+      <div className="flex items-center px-5 py-3 hover:bg-card transition-colors">
+        {hasSubcategories && (
+          <button
+            onClick={onToggle}
+            className="mr-2 text-foreground/40 hover:text-foreground transition-colors"
+            aria-label={isOpen ? "Schließen" : "Öffnen"}
+          >
+            {isOpen ? (
+              <Minus className="w-3.5 h-3.5" />
+            ) : (
+              <Plus className="w-3.5 h-3.5" />
+            )}
+          </button>
+        )}
+        <a
+          href={category.href}
+          className={`flex-1 text-[13px] font-bold uppercase tracking-wide transition-colors ${
+            isOpen ? "text-foreground" : "text-foreground/70 hover:text-foreground"
+          }`}
+        >
+          {category.label}
+        </a>
+        {category.count && (
+          <span className="text-[11px] text-foreground/25 ml-2">{category.count}</span>
+        )}
+      </div>
+
+      {/* Subcategories — expand on hover/click */}
+      {isOpen && hasSubcategories && (
+        <div className="pb-2 animate-in fade-in slide-in-from-top-1 duration-200">
+          {category.subcategories.map((sub) => (
+            <a
+              key={typeof sub === "string" ? sub : sub.label}
+              href="#"
+              className="flex items-center gap-2 pl-11 pr-5 py-2 text-sm text-foreground/50 hover:text-foreground transition-colors"
+            >
+              {typeof sub === "string" ? sub : (
+                <>
+                  {sub.expandable && <Plus className="w-3 h-3 text-foreground/30" />}
+                  <span>{sub.label}</span>
+                  {sub.count && <span className="text-[11px] text-foreground/20 ml-auto">{sub.count}</span>}
+                </>
+              )}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);

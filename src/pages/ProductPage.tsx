@@ -2,6 +2,8 @@ import Header from "@/components/Header";
 import { ArrowRight, ChevronRight, Minus, Plus, Shield, Wind, Feather, Droplets } from "lucide-react";
 import { useState } from "react";
 
+import b2bImg from "@/assets/b2b-beratung.jpg";
+
 import imgMain from "@/assets/product-fuzzy-main.jpg";
 import imgSole from "@/assets/product-fuzzy-sole.jpg";
 import imgTop from "@/assets/product-fuzzy-top.jpg";
@@ -195,19 +197,34 @@ const ProductPage = () => {
                 ))}
               </div>
 
-              {/* B2B Section */}
-              <div className="bg-secondary/50 rounded-lg p-6 !mt-10">
-                <h4 className="text-foreground text-sm font-bold uppercase tracking-wider mb-3">Für Firmenkunden</h4>
-                <ul className="list-disc pl-5 space-y-1 text-sm">
-                  <li>Attraktive Staffelpreise</li>
-                  <li>Individuelle Sonderkonditionen</li>
-                  <li>Persönliche Beratung</li>
-                  <li>Österreichweiter Außendienst</li>
-                </ul>
-                <div className="mt-4 pt-4 border-t border-border/30 text-sm">
-                  <p>📞 <strong className="text-foreground">Telefon:</strong> +43 800 286796</p>
-                  <p>✉ <strong className="text-foreground">E-Mail:</strong> office@kp-workwear.com</p>
-                </div>
+            </div>
+          </div>
+        </section>
+
+        {/* B2B CTA Section */}
+        <section className="border-t border-border/50">
+          <div className="container py-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0 rounded-xl overflow-hidden border border-border/50">
+              <div className="aspect-[16/10] md:aspect-auto">
+                <img src={b2bImg} alt="Persönliche Beratung vor Ort" className="w-full h-full object-cover" loading="lazy" width={1280} height={720} />
+              </div>
+              <div className="bg-card flex flex-col justify-center p-8 md:p-12">
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-3">Für Firmenkunden</p>
+                <h2 className="text-xl md:text-2xl font-black uppercase tracking-tight mb-4">
+                  Anprobe im Betrieb – einfach & unkompliziert
+                </h2>
+                <p className="text-sm text-foreground/50 leading-relaxed mb-6">
+                  Unser österreichweiter Außendienst kommt gerne zur Anprobe in Ihr Unternehmen
+                  und berät Sie persönlich zu passenden Sicherheitsschuhen. Profitieren Sie von
+                  Staffelpreisen und individuellen Sonderkonditionen.
+                </p>
+                <a
+                  href="/pages/grosskundenbetreuung"
+                  className="inline-flex items-center gap-2 self-start px-6 py-3 bg-primary text-primary-foreground font-bold uppercase tracking-widest text-xs rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all hover:scale-[1.02]"
+                >
+                  Mehr erfahren
+                  <ArrowRight className="w-4 h-4" />
+                </a>
               </div>
             </div>
           </div>

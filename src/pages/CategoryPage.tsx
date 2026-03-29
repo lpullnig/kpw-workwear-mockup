@@ -65,19 +65,23 @@ const CategoryPage = () => {
             Unsere Modelle kombinieren geprüften Schutz mit ergonomischer Passform, stoßdämpfender Sohle
             und spürbarer Entlastung – für mehr Komfort im Arbeitsalltag.
           </p>
-          <div className="flex flex-wrap gap-3 mt-6">
+          <div className="flex flex-wrap gap-3 mt-8">
             {[
-              { label: "Bequeme Schuhe", href: "/collections/bequeme-arbeitsschuhe" },
-              { label: "Breite Schuhe", href: "/collections/breite-arbeitsschuhe" },
-              { label: "Atmungsaktive Schuhe", href: "/collections/atmungsaktive-arbeitsschuhe" },
+              { label: "Bequeme Schuhe", href: "/collections/bequeme-arbeitsschuhe", active: true },
+              { label: "Breite Schuhe", href: "/collections/breite-arbeitsschuhe", active: false },
+              { label: "Atmungsaktive Schuhe", href: "/collections/atmungsaktive-arbeitsschuhe", active: false },
             ].map((cat) => (
               <a
                 key={cat.label}
                 href={cat.href}
-                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider border border-border/50 rounded-full text-foreground/70 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all"
+                className={`inline-flex items-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest rounded-full transition-all duration-300 ${
+                  cat.active
+                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
+                    : "bg-card border-2 border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground hover:shadow-lg hover:shadow-primary/30 hover:scale-105"
+                }`}
               >
                 {cat.label}
-                <ArrowRight className="w-3 h-3" />
+                <ArrowRight className="w-4 h-4" />
               </a>
             ))}
           </div>

@@ -171,50 +171,7 @@ const ProductPage = () => {
                 zum idealen Begleiter für anspruchsvolle Arbeits- und Outdoor-Einsätze.
               </p>
 
-              <div className="space-y-0 !mt-10 border border-border/50 rounded-xl overflow-hidden">
-                {[
-                  {
-                    title: "Design",
-                    icon: Paintbrush,
-                    text: "Sportlich-elegantes Profil mit ergonomisch geformter Passform, verstärkter Fersen- und Zehenpartie für sicheren Halt sowie antistatisch abgestimmten Details. Die klare Linienführung und das moderne Außenmaterial harmonieren mit robusten Schutzfunktionen.",
-                  },
-                  {
-                    title: "Material",
-                    icon: Layers,
-                    text: "Obermaterial aus widerstandsfähigem Ripstop-Nylon, Innenfutter DRY PLUS aus dicht gewebtem Polyester mit zusätzlichem Fersenschutz, Nano-Fiberglaseinsatz in der Zehenkappe und NWT-Penetrationsschutz aus ultraleichtem Vliesstoff.",
-                  },
-                  {
-                    title: "Pflege",
-                    icon: Wrench,
-                    text: "Einfach mit milder Seife und lauwarmem Wasser reinigen, an der Luft trocknen lassen. Das strapazierfähige Nylongewebe ist formbeständig und behält auch nach längerer Nutzung seine schmutzabweisenden Eigenschaften.",
-                  },
-                  {
-                    title: "Besonderheit",
-                    icon: Sparkles,
-                    text: "Integrierter ESD-Schutz für elektrische Entladungssicherheit, ultraleichter Durchtrittsschutz (NWT) und Nano-Fiberglaskappe für hohen Zehenschutz bei minimalem Gewicht. Die rutschfeste Sohle bietet optimalen Grip auf nassen und öligen Untergründen.",
-                  },
-                ].map((block, i, arr) => {
-                  const [open, setOpen] = useState(i === 0);
-                  return (
-                    <button
-                      key={block.title}
-                      onClick={() => setOpen(!open)}
-                      className={`w-full text-left transition-all ${i < arr.length - 1 ? "border-b border-border/50" : ""}`}
-                    >
-                      <div className="flex items-center justify-between px-6 py-5 hover:bg-secondary/30 transition-colors">
-                        <div className="flex items-center gap-3">
-                          <block.icon className="w-4 h-4 text-primary flex-shrink-0" />
-                          <h3 className="text-sm font-bold uppercase tracking-wider text-foreground">{block.title}</h3>
-                        </div>
-                        <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-300 ${open ? "rotate-180" : ""}`} />
-                      </div>
-                      <div className={`overflow-hidden transition-all duration-300 ${open ? "max-h-40 pb-5" : "max-h-0"}`}>
-                        <p className="px-6 pl-13 text-foreground/50 text-sm leading-relaxed">{block.text}</p>
-                      </div>
-                    </button>
-                  );
-                })}
-              </div>
+              <ProductDetailAccordion />
 
             </div>
           </div>

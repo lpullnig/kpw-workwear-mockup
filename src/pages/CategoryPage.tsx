@@ -15,16 +15,16 @@ import shoeJourney from "@/assets/shoe-journey.jpg";
 import shoeUniqueLow from "@/assets/shoe-unique-low.jpg";
 
 const products = [
-  { name: "RESPONDER MID BOOT S3S", price: "€109,95", priceNote: "exkl. MWSt.", variants: ["BLACK/BLUE"], isNew: true, badges: ["Besonders leicht", "Atmungsaktiv"], image: shoeResponderMid },
-  { name: "SPIRIT MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], isNew: true, badges: ["Atmungsaktiv"], image: shoeSpiritMid },
-  { name: "EXOTIC MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], badges: ["Rutschfest"], image: shoeExoticMid },
-  { name: "PIONEER MID BOOT S3", price: "€95,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], badges: ["Wasserdicht"], image: shoePioneerMid },
-  { name: "RESPONDER LOW SHOE S3S", price: "€99,95", priceNote: "exkl. MWSt.", variants: ["BLACK/BLUE"], isNew: true, badges: ["Besonders leicht"], image: shoeResponderLow },
-  { name: "SPIRIT LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], badges: ["Atmungsaktiv", "Besonders leicht"], image: shoeSpiritLow },
-  { name: "EXOTIC LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], image: shoeExoticLow },
-  { name: "PIONEER LOW SHOE S3", price: "€87,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], badges: ["Wasserdicht"], image: shoePioneerLow },
-  { name: "JOURNEY SHOE S3S", price: "€90,95", priceNote: "exkl. MWSt.", variants: ["GREY"], badges: ["Rutschfest", "Besonders leicht"], image: shoeJourney },
-  { name: "UNIQUE LOW SHOE S1PS", price: "€84,95", priceNote: "exkl. MWSt.", variants: ["BLACK/GREEN"], image: shoeUniqueLow },
+  { name: "RESPONDER MID BOOT S3S", price: "€109,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Besonders leicht", "Atmungsaktiv"], image: shoeResponderMid },
+  { name: "SPIRIT MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Atmungsaktiv"], image: shoeSpiritMid },
+  { name: "EXOTIC MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", badges: ["Rutschfest"], image: shoeExoticMid },
+  { name: "PIONEER MID BOOT S3", price: "€95,95", priceNote: "exkl. MWSt.", badges: ["Wasserdicht"], image: shoePioneerMid },
+  { name: "RESPONDER LOW SHOE S3S", price: "€99,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Besonders leicht"], image: shoeResponderLow },
+  { name: "SPIRIT LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", badges: ["Atmungsaktiv", "Besonders leicht"], image: shoeSpiritLow },
+  { name: "EXOTIC LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", image: shoeExoticLow },
+  { name: "PIONEER LOW SHOE S3", price: "€87,95", priceNote: "exkl. MWSt.", badges: ["Wasserdicht"], image: shoePioneerLow },
+  { name: "JOURNEY SHOE S3S", price: "€90,95", priceNote: "exkl. MWSt.", badges: ["Rutschfest", "Besonders leicht"], image: shoeJourney },
+  { name: "UNIQUE LOW SHOE S1PS", price: "€84,95", priceNote: "exkl. MWSt.", image: shoeUniqueLow },
 ];
 
 const sortOptions = ["Meistverkauft", "Preis aufsteigend", "Preis absteigend", "Neueste"];
@@ -148,11 +148,6 @@ const CategoryPage = () => {
                   <p className="text-sm font-semibold text-foreground">
                     {product.price} <span className="text-[10px] text-muted-foreground font-normal">{product.priceNote}</span>
                   </p>
-                  {product.variants.length > 0 && (
-                    <p className="text-[10px] uppercase tracking-widest text-foreground/30 font-medium">
-                      {product.variants.join(" · ")}
-                    </p>
-                  )}
                   {product.badges && product.badges.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 pt-1">
                       {product.badges.map((badge) => (

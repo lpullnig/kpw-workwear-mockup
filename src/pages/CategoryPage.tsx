@@ -148,11 +148,6 @@ const CategoryPage = () => {
                   <p className="text-sm font-semibold text-foreground">
                     {product.price} <span className="text-[10px] text-muted-foreground font-normal">{product.priceNote}</span>
                   </p>
-                  {product.variants.length > 0 && (
-                    <p className="text-[10px] uppercase tracking-widest text-foreground/30 font-medium">
-                      {product.variants.join(" · ")}
-                    </p>
-                  )}
                   {product.badges && product.badges.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 pt-1">
                       {product.badges.map((badge) => (

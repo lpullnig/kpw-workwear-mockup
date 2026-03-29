@@ -83,6 +83,7 @@ const ProductPage = () => {
                 <p className="text-3xl font-black text-foreground">
                   €85,95 <span className="text-sm font-normal text-muted-foreground">exkl. MWSt.</span>
                 </p>
+                <p className="text-xs text-primary font-semibold mt-1">✓ Versandkostenfrei in ganz Österreich</p>
               </div>
 
               {/* Features */}
@@ -149,12 +150,6 @@ const ProductPage = () => {
                 Anfragen für Staffelpreise
               </button>
 
-              {/* Shipping Note */}
-              <div className="bg-primary/10 border border-primary/20 rounded-lg px-4 py-3 text-center">
-                <p className="text-xs font-bold uppercase tracking-wider text-primary">
-                  Versandkostenfrei in ganz Österreich
-                </p>
-              </div>
             </div>
           </div>
         </div>

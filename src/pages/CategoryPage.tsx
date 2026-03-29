@@ -300,6 +300,52 @@ const CategoryPage = () => {
             </div>
           </div>
         </section>
+
+        {/* Produktvorschläge */}
+        <section className="border-t border-border/50">
+          <div className="container py-16 md:py-20">
+            <div className="mb-10">
+              <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-primary mb-3">Empfehlungen</p>
+              <div className="w-10 h-[2px] bg-primary mb-5" />
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-black uppercase tracking-tight">
+                Das könnte Sie auch interessieren
+              </h2>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              {products.slice(0, 4).map((product) => (
+                <a key={`suggestion-${product.name}`} href="#" className="group block">
+                  <div className="relative aspect-square rounded-lg overflow-hidden mb-4 bg-card border border-border/50 group-hover:border-primary/20 transition-all group-hover:shadow-xl group-hover:shadow-primary/5">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      width={800}
+                      height={800}
+                    />
+                    {product.isNew && (
+                      <span className="absolute top-3 left-3 px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-primary text-primary-foreground rounded-full">
+                        Neu
+                      </span>
+                    )}
+                  </div>
+                  <div className="space-y-1.5">
+                    <h3 className="font-bold text-sm leading-snug group-hover:text-primary transition-colors">
+                      {product.name}
+                    </h3>
+                    <div className="w-6 h-[1px] bg-border" />
+                    <p className="text-sm font-semibold text-foreground">
+                      {product.price} <span className="text-[10px] text-muted-foreground font-normal">{product.priceNote}</span>
+                    </p>
+                    <span className="inline-flex items-center gap-1 text-xs text-primary font-semibold pt-1 translate-y-1 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                      Zum Produkt <ArrowRight className="w-3 h-3" />
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="py-6 border-t border-border/30">

@@ -23,9 +23,10 @@ const footerLinks = {
   ],
   rechtliches: [
     { label: "Impressum", href: "#" },
-    { label: "Datenschutz", href: "#" },
-    { label: "AGB", href: "#" },
-    { label: "Widerrufsrecht", href: "#" },
+    { label: "Impressum", href: "/legal?tab=impressum" },
+    { label: "Datenschutz", href: "/legal?tab=datenschutz" },
+    { label: "AGB", href: "/legal?tab=agb" },
+    { label: "Widerrufsrecht", href: "/legal?tab=widerruf" },
     { label: "Versand & Lieferung", href: "#" },
   ],
 };

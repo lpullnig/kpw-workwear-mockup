@@ -60,6 +60,7 @@ const ProductDetailAccordion = () => {
   );
 };
 
+const ProductPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
   const [selectedSize, setSelectedSize] = useState<number | null>(null);
   const [quantity, setQuantity] = useState(1);

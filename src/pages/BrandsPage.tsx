@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Link } from "react-router-dom";
 
 const brands = [
@@ -57,13 +58,7 @@ const BrandsPage = () => (
       </section>
     </main>
 
-    <footer className="py-6 border-t border-border/30">
-      <div className="container text-center">
-        <p className="text-[11px] text-foreground/25 tracking-wide">
-          © 2026 KPW — Arbeitskleidung & Sicherheitsschuhe · Klagenfurt, Kärnten
-        </p>
-      </div>
-    </footer>
+    <Footer />
   </div>
 );
 

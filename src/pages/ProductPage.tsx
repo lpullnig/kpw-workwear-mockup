@@ -214,7 +214,7 @@ const ProductPage = () => {
                 zum idealen Begleiter für anspruchsvolle Arbeits- und Outdoor-Einsätze.
               </p>
 
-              <ProductDetailAccordion />
+              <ProductDetailTabs />
 
             </div>
           </div>

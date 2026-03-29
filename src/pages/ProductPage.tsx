@@ -27,35 +27,38 @@ const detailBlocks = [
   { title: "Besonderheit", icon: Sparkles, text: "Integrierter ESD-Schutz für elektrische Entladungssicherheit, ultraleichter Durchtrittsschutz (NWT) und Nano-Fiberglaskappe für hohen Zehenschutz bei minimalem Gewicht. Die rutschfeste Sohle bietet optimalen Grip auf nassen und öligen Untergründen." },
 ];
 
-const ProductDetailAccordion = () => {
-  const [openIndex, setOpenIndex] = useState(0);
+const ProductDetailTabs = () => {
+  const [activeTab, setActiveTab] = useState(0);
+  const ActiveIcon = detailBlocks[activeTab].icon;
 
   return (
-    <div className="!mt-10 border border-border/50 rounded-xl overflow-hidden">
-      {detailBlocks.map((block, i) => {
-        const isOpen = openIndex === i;
-        const Icon = block.icon;
-        return (
-          <button
-            key={block.title}
-            onClick={() => setOpenIndex(isOpen ? -1 : i)}
-            className={`w-full text-left ${i < detailBlocks.length - 1 ? "border-b border-border/50" : ""}`}
-          >
-            <div className="flex items-center justify-between px-6 py-5 hover:bg-secondary/30 transition-colors">
-              <div className="flex items-center gap-3">
-                <Icon className="w-4 h-4 text-primary flex-shrink-0" />
-                <h3 className="text-sm font-bold uppercase tracking-wider text-foreground">{block.title}</h3>
-              </div>
-              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
-            </div>
-            <div className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
-              <div className="overflow-hidden">
-                <p className="px-6 pb-5 pl-[52px] text-foreground/50 text-sm leading-relaxed">{block.text}</p>
-              </div>
-            </div>
-          </button>
-        );
-      })}
+    <div className="!mt-10">
+      <div className="flex border-b border-border/50">
+        {detailBlocks.map((block, i) => {
+          const Icon = block.icon;
+          const isActive = activeTab === i;
+          return (
+            <button
+              key={block.title}
+              onClick={() => setActiveTab(i)}
+              className={`flex items-center gap-2 px-5 py-3.5 text-xs font-bold uppercase tracking-wider transition-colors relative ${
+                isActive
+                  ? "text-primary"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              <Icon className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">{block.title}</span>
+              {isActive && (
+                <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary" />
+              )}
+            </button>
+          );
+        })}
+      </div>
+      <div className="py-6">
+        <p className="text-foreground/50 text-sm leading-relaxed">{detailBlocks[activeTab].text}</p>
+      </div>
     </div>
   );
 };
@@ -211,7 +214,7 @@ const ProductPage = () => {
                 zum idealen Begleiter für anspruchsvolle Arbeits- und Outdoor-Einsätze.
               </p>
 
-              <ProductDetailAccordion />
+              <ProductDetailTabs />
 
             </div>
           </div>

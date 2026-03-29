@@ -1,5 +1,5 @@
 import Header from "@/components/Header";
-import { ArrowRight, ChevronRight, Minus, Plus, Shield, Wind, Feather, Droplets } from "lucide-react";
+import { ArrowRight, ChevronRight, Minus, Plus, Shield, Wind, Feather, Droplets, ChevronDown, Paintbrush, Layers, Sparkles, Wrench } from "lucide-react";
 import { useState } from "react";
 
 import b2bImg from "@/assets/b2b-beratung.jpg";
@@ -19,6 +19,46 @@ const features = [
   { icon: Wind, label: "Atmungsaktiv" },
   { icon: Droplets, label: "ESD-Schutz" },
 ];
+
+const detailBlocks = [
+  { title: "Design", icon: Paintbrush, text: "Sportlich-elegantes Profil mit ergonomisch geformter Passform, verstärkter Fersen- und Zehenpartie für sicheren Halt sowie antistatisch abgestimmten Details. Die klare Linienführung und das moderne Außenmaterial harmonieren mit robusten Schutzfunktionen." },
+  { title: "Material", icon: Layers, text: "Obermaterial aus widerstandsfähigem Ripstop-Nylon, Innenfutter DRY PLUS aus dicht gewebtem Polyester mit zusätzlichem Fersenschutz, Nano-Fiberglaseinsatz in der Zehenkappe und NWT-Penetrationsschutz aus ultraleichtem Vliesstoff." },
+  { title: "Pflege", icon: Wrench, text: "Einfach mit milder Seife und lauwarmem Wasser reinigen, an der Luft trocknen lassen. Das strapazierfähige Nylongewebe ist formbeständig und behält auch nach längerer Nutzung seine schmutzabweisenden Eigenschaften." },
+  { title: "Besonderheit", icon: Sparkles, text: "Integrierter ESD-Schutz für elektrische Entladungssicherheit, ultraleichter Durchtrittsschutz (NWT) und Nano-Fiberglaskappe für hohen Zehenschutz bei minimalem Gewicht. Die rutschfeste Sohle bietet optimalen Grip auf nassen und öligen Untergründen." },
+];
+
+const ProductDetailAccordion = () => {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  return (
+    <div className="!mt-10 border border-border/50 rounded-xl overflow-hidden">
+      {detailBlocks.map((block, i) => {
+        const isOpen = openIndex === i;
+        const Icon = block.icon;
+        return (
+          <button
+            key={block.title}
+            onClick={() => setOpenIndex(isOpen ? -1 : i)}
+            className={`w-full text-left ${i < detailBlocks.length - 1 ? "border-b border-border/50" : ""}`}
+          >
+            <div className="flex items-center justify-between px-6 py-5 hover:bg-secondary/30 transition-colors">
+              <div className="flex items-center gap-3">
+                <Icon className="w-4 h-4 text-primary flex-shrink-0" />
+                <h3 className="text-sm font-bold uppercase tracking-wider text-foreground">{block.title}</h3>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`} />
+            </div>
+            <div className={`grid transition-all duration-300 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
+              <div className="overflow-hidden">
+                <p className="px-6 pb-5 pl-[52px] text-foreground/50 text-sm leading-relaxed">{block.text}</p>
+              </div>
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  );
+};
 
 const ProductPage = () => {
   const [selectedImage, setSelectedImage] = useState(0);
@@ -171,31 +211,7 @@ const ProductPage = () => {
                 zum idealen Begleiter für anspruchsvolle Arbeits- und Outdoor-Einsätze.
               </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 !mt-10">
-                {[
-                  {
-                    title: "Design",
-                    text: "Sportlich-elegantes Profil mit ergonomisch geformter Passform, verstärkter Fersen- und Zehenpartie für sicheren Halt sowie antistatisch abgestimmten Details.",
-                  },
-                  {
-                    title: "Material",
-                    text: "Obermaterial aus widerstandsfähigem Ripstop-Nylon, Innenfutter DRY PLUS aus dicht gewebtem Polyester, Nano-Fiberglaseinsatz in der Zehenkappe und NWT-Penetrationsschutz.",
-                  },
-                  {
-                    title: "Pflege",
-                    text: "Einfach mit milder Seife und lauwarmem Wasser reinigen, an der Luft trocknen lassen. Das strapazierfähige Nylongewebe ist formbeständig und schmutzabweisend.",
-                  },
-                  {
-                    title: "Besonderheit",
-                    text: "Integrierter ESD-Schutz, ultraleichter Durchtrittsschutz (NWT) und Nano-Fiberglaskappe für hohen Zehenschutz bei minimalem Gewicht.",
-                  },
-                ].map((block) => (
-                  <div key={block.title} className="bg-secondary/50 rounded-lg p-6">
-                    <h3 className="text-foreground text-sm font-bold uppercase tracking-wider mb-3">{block.title}</h3>
-                    <p className="text-foreground/50 text-sm leading-relaxed">{block.text}</p>
-                  </div>
-                ))}
-              </div>
+              <ProductDetailAccordion />
 
             </div>
           </div>

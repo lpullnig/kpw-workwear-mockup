@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { ArrowRight, ChevronRight, SlidersHorizontal, X } from "lucide-react";
 import { useState, useMemo } from "react";
 

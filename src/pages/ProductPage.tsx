@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { ArrowRight, ChevronRight, Minus, Plus, Shield, Wind, Feather, Droplets, ChevronDown, Paintbrush, Layers, Sparkles, Wrench } from "lucide-react";
 import { useState } from "react";
 

@@ -65,7 +65,11 @@ const CategoryPage = () => {
             Unsere Modelle kombinieren geprüften Schutz mit ergonomischer Passform, stoßdämpfender Sohle
             und spürbarer Entlastung – für mehr Komfort im Arbeitsalltag.
           </p>
-          <div className="flex flex-wrap gap-3 mt-8">
+        </div>
+
+        {/* Subcategory Navigation */}
+        <div className="container pb-10">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             {[
               { label: "Bequeme Schuhe", href: "/collections/bequeme-arbeitsschuhe", active: true },
               { label: "Breite Schuhe", href: "/collections/breite-arbeitsschuhe", active: false },
@@ -74,10 +78,10 @@ const CategoryPage = () => {
               <a
                 key={cat.label}
                 href={cat.href}
-                className={`inline-flex items-center gap-2 px-6 py-3 text-sm font-bold uppercase tracking-widest rounded-full transition-all duration-300 ${
+                className={`flex items-center justify-center gap-2 px-6 py-5 text-sm font-bold uppercase tracking-widest rounded-lg transition-all duration-300 text-center ${
                   cat.active
                     ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
-                    : "bg-card border-2 border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground hover:shadow-lg hover:shadow-primary/30 hover:scale-105"
+                    : "bg-card border-2 border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground hover:shadow-lg hover:shadow-primary/30 hover:scale-[1.02]"
                 }`}
               >
                 {cat.label}

@@ -65,6 +65,22 @@ const CategoryPage = () => {
             Unsere Modelle kombinieren geprüften Schutz mit ergonomischer Passform, stoßdämpfender Sohle
             und spürbarer Entlastung – für mehr Komfort im Arbeitsalltag.
           </p>
+          <div className="flex flex-wrap gap-3 mt-6">
+            {[
+              { label: "Bequeme Schuhe", href: "/collections/bequeme-arbeitsschuhe" },
+              { label: "Breite Schuhe", href: "/collections/breite-arbeitsschuhe" },
+              { label: "Atmungsaktive Schuhe", href: "/collections/atmungsaktive-arbeitsschuhe" },
+            ].map((cat) => (
+              <a
+                key={cat.label}
+                href={cat.href}
+                className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold uppercase tracking-wider border border-border/50 rounded-full text-foreground/70 hover:border-primary hover:text-primary hover:bg-primary/5 transition-all"
+              >
+                {cat.label}
+                <ArrowRight className="w-3 h-3" />
+              </a>
+            ))}
+          </div>
         </div>
 
         {/* Free Shipping Banner */}

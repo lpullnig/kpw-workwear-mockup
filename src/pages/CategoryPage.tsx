@@ -141,11 +141,45 @@ const CategoryPage = () => {
           </div>
         </div>
 
+        {/* Filter Tags */}
+        <div className="container pb-6">
+          <div className="border border-border/50 rounded-xl bg-card/50 p-5">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground mb-3">Filtern nach</p>
+            <div className="flex flex-wrap gap-2">
+              {allTags.map((tag) => {
+                const isActive = activeTags.includes(tag);
+                return (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    className={`inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full border transition-all duration-200 ${
+                      isActive
+                        ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
+                        : "bg-background border-border/50 text-foreground/70 hover:border-primary/40 hover:text-primary"
+                    }`}
+                  >
+                    {tag}
+                    {isActive && <X className="w-3 h-3" />}
+                  </button>
+                );
+              })}
+            </div>
+            {activeTags.length > 0 && (
+              <button
+                onClick={() => setActiveTags([])}
+                className="mt-3 text-xs text-muted-foreground hover:text-primary transition-colors font-semibold"
+              >
+                Alle Filter zurücksetzen
+              </button>
+            )}
+          </div>
+        </div>
+
         {/* Toolbar */}
         <div className="container pb-6">
           <div className="flex items-center justify-between border-b border-border/50 pb-4">
             <p className="text-sm text-muted-foreground">
-              <span className="font-semibold text-foreground">{products.length}</span> Produkte
+              <span className="font-semibold text-foreground">{filteredProducts.length}</span> Produkte
             </p>
             <div className="flex items-center gap-3">
               <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />

@@ -199,7 +199,7 @@ const CategoryPage = () => {
         {/* Product Grid */}
         <div className="container pb-20">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <a key={product.name} href="#" className="group block">
                 <div className="relative aspect-square rounded-lg overflow-hidden mb-4 bg-card border border-border/50 group-hover:border-primary/20 transition-all group-hover:shadow-xl group-hover:shadow-primary/5">
                   <img

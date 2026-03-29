@@ -2,17 +2,29 @@ import Header from "@/components/Header";
 import { ArrowRight, ChevronRight, SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
 
+import heroImg from "@/assets/category-hero-shoes.jpg";
+import shoeResponderMid from "@/assets/shoe-responder-mid.jpg";
+import shoeSpiritMid from "@/assets/shoe-spirit-mid.jpg";
+import shoeExoticMid from "@/assets/shoe-exotic-mid.jpg";
+import shoePioneerMid from "@/assets/shoe-pioneer-mid.jpg";
+import shoeResponderLow from "@/assets/shoe-responder-low.jpg";
+import shoeSpiritLow from "@/assets/shoe-spirit-low.jpg";
+import shoeExoticLow from "@/assets/shoe-exotic-low.jpg";
+import shoePioneerLow from "@/assets/shoe-pioneer-low.jpg";
+import shoeJourney from "@/assets/shoe-journey.jpg";
+import shoeUniqueLow from "@/assets/shoe-unique-low.jpg";
+
 const products = [
-  { name: "RESPONDER MID BOOT S3S", price: "€109,95", priceNote: "exkl. MWSt.", variants: ["BLACK/BLUE"], isNew: true },
-  { name: "SPIRIT MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], isNew: true },
-  { name: "EXOTIC MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", variants: ["BLACK"] },
-  { name: "PIONEER MID BOOT S3", price: "€95,95", priceNote: "exkl. MWSt.", variants: ["BLACK"] },
-  { name: "RESPONDER LOW SHOE S3S", price: "€99,95", priceNote: "exkl. MWSt.", variants: ["BLACK/BLUE"], isNew: true },
-  { name: "SPIRIT LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", variants: ["BLACK"] },
-  { name: "EXOTIC LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", variants: ["BLACK"] },
-  { name: "PIONEER LOW SHOE S3", price: "€87,95", priceNote: "exkl. MWSt.", variants: ["BLACK"] },
-  { name: "JOURNEY SHOE S3S", price: "€90,95", priceNote: "exkl. MWSt.", variants: ["GREY"] },
-  { name: "UNIQUE LOW SHOE S1PS", price: "€84,95", priceNote: "exkl. MWSt.", variants: ["BLACK/GREEN"] },
+  { name: "RESPONDER MID BOOT S3S", price: "€109,95", priceNote: "exkl. MWSt.", variants: ["BLACK/BLUE"], isNew: true, image: shoeResponderMid },
+  { name: "SPIRIT MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], isNew: true, image: shoeSpiritMid },
+  { name: "EXOTIC MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], image: shoeExoticMid },
+  { name: "PIONEER MID BOOT S3", price: "€95,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], image: shoePioneerMid },
+  { name: "RESPONDER LOW SHOE S3S", price: "€99,95", priceNote: "exkl. MWSt.", variants: ["BLACK/BLUE"], isNew: true, image: shoeResponderLow },
+  { name: "SPIRIT LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], image: shoeSpiritLow },
+  { name: "EXOTIC LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], image: shoeExoticLow },
+  { name: "PIONEER LOW SHOE S3", price: "€87,95", priceNote: "exkl. MWSt.", variants: ["BLACK"], image: shoePioneerLow },
+  { name: "JOURNEY SHOE S3S", price: "€90,95", priceNote: "exkl. MWSt.", variants: ["GREY"], image: shoeJourney },
+  { name: "UNIQUE LOW SHOE S1PS", price: "€84,95", priceNote: "exkl. MWSt.", variants: ["BLACK/GREEN"], image: shoeUniqueLow },
 ];
 
 const sortOptions = ["Meistverkauft", "Preis aufsteigend", "Preis absteigend", "Neueste"];
@@ -26,7 +38,7 @@ const CategoryPage = () => {
       <main>
         {/* Hero Banner */}
         <div className="relative h-[300px] md:h-[400px] overflow-hidden">
-          <div className="image-placeholder absolute inset-0" />
+          <img src={heroImg} alt="Bequeme Sicherheitsschuhe" className="absolute inset-0 w-full h-full object-cover" width={1920} height={800} />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
         </div>
 
@@ -43,9 +55,7 @@ const CategoryPage = () => {
 
         {/* Title & Description */}
         <div className="container py-8">
-          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-primary mb-3">
-            Kollektion
-          </p>
+          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-primary mb-3">Kollektion</p>
           <div className="w-10 h-[2px] bg-primary mb-5" />
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight mb-4">
             Bequeme Sicherheitsschuhe
@@ -96,7 +106,14 @@ const CategoryPage = () => {
             {products.map((product) => (
               <a key={product.name} href="#" className="group block">
                 <div className="relative aspect-square rounded-lg overflow-hidden mb-4 bg-card border border-border/50 group-hover:border-primary/20 transition-all group-hover:shadow-xl group-hover:shadow-primary/5">
-                  <div className="image-placeholder absolute inset-0 transition-transform duration-500 group-hover:scale-105" />
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    width={800}
+                    height={800}
+                  />
                   {product.isNew && (
                     <span className="absolute top-3 left-3 px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-primary text-primary-foreground rounded-full">
                       Neu
@@ -136,7 +153,6 @@ const CategoryPage = () => {
                 Bequeme Sicherheitsschuhe sind unverzichtbar für alle, die täglich viele Stunden stehen oder laufen.
                 In Handwerk, Industrie, Logistik und Bauwesen müssen Schuhe nicht nur schützen, sondern auch dauerhaft entlasten.
               </p>
-
               <h3 className="text-foreground text-base font-bold uppercase tracking-tight !mt-8">
                 Warum sind bequeme Sicherheitsschuhe so wichtig?
               </h3>
@@ -150,29 +166,15 @@ const CategoryPage = () => {
                 <li>Gepolsterter Fersenbereich</li>
                 <li>Flexibles, anpassungsfähiges Obermaterial</li>
               </ul>
-
               <h3 className="text-foreground text-base font-bold uppercase tracking-tight !mt-8">
                 Welche Merkmale machen einen Sicherheitsschuh wirklich bequem?
               </h3>
               <ul className="list-none pl-0 space-y-3">
-                <li>
-                  <strong className="text-foreground">Geringes Eigengewicht</strong>
-                  <br />Weniger Belastung bei langen Laufwegen.
-                </li>
-                <li>
-                  <strong className="text-foreground">Hochwertige Dämpfung</strong>
-                  <br />Entlastet Ferse und Vorfuß bei hartem Untergrund.
-                </li>
-                <li>
-                  <strong className="text-foreground">Anatomische Passform</strong>
-                  <br />Verhindert Druckstellen und Reibung.
-                </li>
-                <li>
-                  <strong className="text-foreground">Atmungsaktive Materialien</strong>
-                  <br />Reduzieren Schwitzen und erhöhen den Tragekomfort.
-                </li>
+                <li><strong className="text-foreground">Geringes Eigengewicht</strong><br />Weniger Belastung bei langen Laufwegen.</li>
+                <li><strong className="text-foreground">Hochwertige Dämpfung</strong><br />Entlastet Ferse und Vorfuß bei hartem Untergrund.</li>
+                <li><strong className="text-foreground">Anatomische Passform</strong><br />Verhindert Druckstellen und Reibung.</li>
+                <li><strong className="text-foreground">Atmungsaktive Materialien</strong><br />Reduzieren Schwitzen und erhöhen den Tragekomfort.</li>
               </ul>
-
               <h3 className="text-foreground text-base font-bold uppercase tracking-tight !mt-8">
                 Bequeme Sicherheitsschuhe in Österreich kaufen – direkt bei KPW
               </h3>
@@ -181,11 +183,8 @@ const CategoryPage = () => {
                 dauerhaft entlasten. Als österreichischer Anbieter stehen wir für persönliche Beratung,
                 zuverlässige Lieferung und praxisnahe Lösungen für Profis.
               </p>
-
               <div className="bg-secondary/50 rounded-lg p-6 !mt-8">
-                <h4 className="text-foreground text-sm font-bold uppercase tracking-wider mb-3">
-                  Für Firmenkunden bieten wir:
-                </h4>
+                <h4 className="text-foreground text-sm font-bold uppercase tracking-wider mb-3">Für Firmenkunden bieten wir:</h4>
                 <ul className="list-disc pl-5 space-y-1">
                   <li>Attraktive Staffelpreise</li>
                   <li>Individuelle Sonderkonditionen</li>

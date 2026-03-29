@@ -245,6 +245,34 @@ const ProductPage = () => {
             </div>
           </div>
         </section>
+        {/* Produktvorschläge */}
+        <section className="border-t border-border/50">
+          <div className="container py-16 md:py-20">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-primary mb-3">Empfehlungen</p>
+            <h2 className="text-xl sm:text-2xl font-black uppercase tracking-tight mb-10">
+              Das könnte Sie auch interessieren
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+              {[
+                { name: "Endurance Pro S3", price: "€109,95", img: imgMain },
+                { name: "AirStep Light S1P", price: "€79,95", img: imgAngle },
+                { name: "TerraForce Mid S3", price: "€124,95", img: imgSole },
+                { name: "ComfortWalk S1PS", price: "€89,95", img: imgTop },
+              ].map((item) => (
+                <a key={item.name} href="#" className="group block rounded-xl overflow-hidden border border-border/50 bg-card hover:shadow-lg hover:shadow-primary/10 transition-all">
+                  <div className="aspect-square overflow-hidden">
+                    <img src={item.img} alt={item.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" width={512} height={512} />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-xs font-bold uppercase tracking-wider mb-1 group-hover:text-primary transition-colors">{item.name}</h3>
+                    <p className="text-sm font-black text-foreground">{item.price}</p>
+                    <p className="text-[10px] text-primary font-semibold mt-2 opacity-0 group-hover:opacity-100 transition-opacity">Zum Produkt →</p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
       </main>
 
       <footer className="py-6 border-t border-border/30">

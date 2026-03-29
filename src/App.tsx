@@ -10,6 +10,7 @@ import NotFound from "./pages/NotFound.tsx";
 import BrandsPage from "./pages/BrandsPage.tsx";
 import SirSafetyPage from "./pages/SirSafetyPage.tsx";
 import LegalPage from "./pages/LegalPage.tsx";
+import GrosskundenPage from "./pages/GrosskundenPage.tsx";
 
 const queryClient = new QueryClient();
 

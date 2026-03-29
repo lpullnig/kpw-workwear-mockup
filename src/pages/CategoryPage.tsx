@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
-import { ArrowRight, ChevronRight, SlidersHorizontal } from "lucide-react";
-import { useState } from "react";
+import { ArrowRight, ChevronRight, SlidersHorizontal, X } from "lucide-react";
+import { useState, useMemo } from "react";
 
 import heroImg from "@/assets/category-hero-shoes.jpg";
 import shoeResponderMid from "@/assets/shoe-responder-mid.jpg";
@@ -15,22 +15,38 @@ import shoeJourney from "@/assets/shoe-journey.jpg";
 import shoeUniqueLow from "@/assets/shoe-unique-low.jpg";
 
 const products = [
-  { name: "RESPONDER MID BOOT S3S", price: "€109,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Besonders leicht", "Atmungsaktiv"], image: shoeResponderMid },
-  { name: "SPIRIT MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Atmungsaktiv"], image: shoeSpiritMid },
-  { name: "EXOTIC MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", badges: ["Rutschfest"], image: shoeExoticMid },
-  { name: "PIONEER MID BOOT S3", price: "€95,95", priceNote: "exkl. MWSt.", badges: ["Wasserdicht"], image: shoePioneerMid },
-  { name: "RESPONDER LOW SHOE S3S", price: "€99,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Besonders leicht"], image: shoeResponderLow },
-  { name: "SPIRIT LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", badges: ["Atmungsaktiv", "Besonders leicht"], image: shoeSpiritLow },
-  { name: "EXOTIC LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", image: shoeExoticLow },
-  { name: "PIONEER LOW SHOE S3", price: "€87,95", priceNote: "exkl. MWSt.", badges: ["Wasserdicht"], image: shoePioneerLow },
-  { name: "JOURNEY SHOE S3S", price: "€90,95", priceNote: "exkl. MWSt.", badges: ["Rutschfest", "Besonders leicht"], image: shoeJourney },
-  { name: "UNIQUE LOW SHOE S1PS", price: "€84,95", priceNote: "exkl. MWSt.", image: shoeUniqueLow },
+  { name: "RESPONDER MID BOOT S3S", price: "€109,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Besonders leicht", "Atmungsaktiv"], tags: ["Für Damen", "ESD"], image: shoeResponderMid },
+  { name: "SPIRIT MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Atmungsaktiv"], tags: ["Für Damen"], image: shoeSpiritMid },
+  { name: "EXOTIC MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", badges: ["Rutschfest"], tags: ["Besonders breit", "Orthopädisch"], image: shoeExoticMid },
+  { name: "PIONEER MID BOOT S3", price: "€95,95", priceNote: "exkl. MWSt.", badges: ["Wasserdicht"], tags: ["Besonders breit", "Winter"], image: shoePioneerMid },
+  { name: "RESPONDER LOW SHOE S3S", price: "€99,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Besonders leicht"], tags: ["ESD", "Für Damen"], image: shoeResponderLow },
+  { name: "SPIRIT LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", badges: ["Atmungsaktiv", "Besonders leicht"], tags: ["Für Damen"], image: shoeSpiritLow },
+  { name: "EXOTIC LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", tags: ["Besonders breit", "Orthopädisch"], image: shoeExoticLow },
+  { name: "PIONEER LOW SHOE S3", price: "€87,95", priceNote: "exkl. MWSt.", badges: ["Wasserdicht"], tags: ["Besonders breit", "Winter"], image: shoePioneerLow },
+  { name: "JOURNEY SHOE S3S", price: "€90,95", priceNote: "exkl. MWSt.", badges: ["Rutschfest", "Besonders leicht"], tags: ["ESD"], image: shoeJourney },
+  { name: "UNIQUE LOW SHOE S1PS", price: "€84,95", priceNote: "exkl. MWSt.", tags: ["Orthopädisch"], image: shoeUniqueLow },
 ];
+
+const allTags = ["Für Damen", "Besonders breit", "ESD", "Orthopädisch", "Winter"];
 
 const sortOptions = ["Meistverkauft", "Preis aufsteigend", "Preis absteigend", "Neueste"];
 
 const CategoryPage = () => {
   const [sortBy, setSortBy] = useState("Meistverkauft");
+  const [activeTags, setActiveTags] = useState<string[]>([]);
+
+  const toggleTag = (tag: string) => {
+    setActiveTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
+  };
+
+  const filteredProducts = useMemo(() => {
+    if (activeTags.length === 0) return products;
+    return products.filter((p) =>
+      activeTags.every((tag) => p.tags?.includes(tag))
+    );
+  }, [activeTags]);
 
   return (
     <div className="min-h-screen">
@@ -125,11 +141,45 @@ const CategoryPage = () => {
           </div>
         </div>
 
+        {/* Filter Tags */}
+        <div className="container pb-6">
+          <div className="border border-border/50 rounded-xl bg-card/50 p-5">
+            <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-muted-foreground mb-3">Filtern nach</p>
+            <div className="flex flex-wrap gap-2">
+              {allTags.map((tag) => {
+                const isActive = activeTags.includes(tag);
+                return (
+                  <button
+                    key={tag}
+                    onClick={() => toggleTag(tag)}
+                    className={`inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-full border transition-all duration-200 ${
+                      isActive
+                        ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/20"
+                        : "bg-background border-border/50 text-foreground/70 hover:border-primary/40 hover:text-primary"
+                    }`}
+                  >
+                    {tag}
+                    {isActive && <X className="w-3 h-3" />}
+                  </button>
+                );
+              })}
+            </div>
+            {activeTags.length > 0 && (
+              <button
+                onClick={() => setActiveTags([])}
+                className="mt-3 text-xs text-muted-foreground hover:text-primary transition-colors font-semibold"
+              >
+                Alle Filter zurücksetzen
+              </button>
+            )}
+          </div>
+        </div>
+
         {/* Toolbar */}
         <div className="container pb-6">
           <div className="flex items-center justify-between border-b border-border/50 pb-4">
             <p className="text-sm text-muted-foreground">
-              <span className="font-semibold text-foreground">{products.length}</span> Produkte
+              <span className="font-semibold text-foreground">{filteredProducts.length}</span> Produkte
             </p>
             <div className="flex items-center gap-3">
               <SlidersHorizontal className="w-4 h-4 text-muted-foreground" />
@@ -149,7 +199,7 @@ const CategoryPage = () => {
         {/* Product Grid */}
         <div className="container pb-20">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <a key={product.name} href="#" className="group block">
                 <div className="relative aspect-square rounded-lg overflow-hidden mb-4 bg-card border border-border/50 group-hover:border-primary/20 transition-all group-hover:shadow-xl group-hover:shadow-primary/5">
                   <img

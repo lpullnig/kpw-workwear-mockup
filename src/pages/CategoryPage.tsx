@@ -68,26 +68,48 @@ const CategoryPage = () => {
         </div>
 
         {/* Subcategory Navigation */}
-        <div className="container pb-10">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {[
-              { label: "Bequeme Schuhe", href: "/collections/bequeme-arbeitsschuhe", active: true },
-              { label: "Breite Schuhe", href: "/collections/breite-arbeitsschuhe", active: false },
-              { label: "Atmungsaktive Schuhe", href: "/collections/atmungsaktive-arbeitsschuhe", active: false },
-            ].map((cat) => (
+        <div className="container pb-12">
+          <div className="border border-border/50 rounded-xl bg-card/50 p-6 md:p-8">
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <p className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.3em] text-primary mb-1">Kategorien</p>
+                <h2 className="text-lg font-black uppercase tracking-tight">Sicherheitsschuhe entdecken</h2>
+              </div>
               <a
-                key={cat.label}
-                href={cat.href}
-                className={`flex items-center justify-center gap-2 px-6 py-5 text-sm font-bold uppercase tracking-widest rounded-lg transition-all duration-300 text-center ${
-                  cat.active
-                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
-                    : "bg-card border-2 border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground hover:shadow-lg hover:shadow-primary/30 hover:scale-[1.02]"
-                }`}
+                href="/collections/schuhe"
+                className="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-primary transition-colors"
               >
-                {cat.label}
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-3 h-3 rotate-180" />
+                Alle Schuhe anzeigen
               </a>
-            ))}
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                { label: "Bequeme Schuhe", href: "/collections/bequeme-arbeitsschuhe", active: true },
+                { label: "Breite Schuhe", href: "/collections/breite-arbeitsschuhe", active: false },
+                { label: "Atmungsaktive Schuhe", href: "/collections/atmungsaktive-arbeitsschuhe", active: false },
+              ].map((cat) => (
+                <a
+                  key={cat.label}
+                  href={cat.href}
+                  className={`flex items-center justify-center gap-2 px-6 py-5 text-sm font-bold uppercase tracking-widest rounded-lg transition-all duration-300 text-center ${
+                    cat.active
+                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30"
+                      : "bg-background border-2 border-primary/40 text-primary hover:bg-primary hover:text-primary-foreground hover:shadow-lg hover:shadow-primary/30 hover:scale-[1.02]"
+                  }`}
+                >
+                  {cat.label}
+                  <ArrowRight className="w-4 h-4" />
+                </a>
+              ))}
+            </div>
+            <a
+              href="/collections/schuhe"
+              className="sm:hidden flex items-center justify-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-primary transition-colors mt-5"
+            >
+              <ArrowRight className="w-3 h-3 rotate-180" />
+              Alle Schuhe anzeigen
+            </a>
           </div>
         </div>
 

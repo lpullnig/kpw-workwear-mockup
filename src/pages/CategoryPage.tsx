@@ -18,13 +18,13 @@ import shoeUniqueLow from "@/assets/shoe-unique-low.jpg";
 const products = [
   { name: "RESPONDER MID BOOT S3S", price: "€109,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Besonders leicht", "Atmungsaktiv"], tags: ["Für Damen", "ESD"], image: shoeResponderMid },
   { name: "SPIRIT MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Atmungsaktiv"], tags: ["Für Damen"], image: shoeSpiritMid },
-  { name: "EXOTIC MID BOOT S1PS", price: "€95,95", priceNote: "exkl. MWSt.", badges: ["Rutschfest"], tags: ["Besonders breit", "Orthopädisch"], image: shoeExoticMid },
+  { name: "EXOTIC MID BOOT S1PS", price: "€79,95", oldPrice: "€95,95", priceNote: "exkl. MWSt.", onSale: true, badges: ["Rutschfest"], tags: ["Besonders breit", "Orthopädisch"], image: shoeExoticMid },
   { name: "PIONEER MID BOOT S3", price: "€95,95", priceNote: "exkl. MWSt.", badges: ["Wasserdicht"], tags: ["Besonders breit", "Winter"], image: shoePioneerMid },
   { name: "RESPONDER LOW SHOE S3S", price: "€99,95", priceNote: "exkl. MWSt.", isNew: true, badges: ["Besonders leicht"], tags: ["ESD", "Für Damen"], image: shoeResponderLow },
-  { name: "SPIRIT LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", badges: ["Atmungsaktiv", "Besonders leicht"], tags: ["Für Damen"], image: shoeSpiritLow },
+  { name: "SPIRIT LOW SHOE S1PS", price: "€74,95", oldPrice: "€87,95", priceNote: "exkl. MWSt.", onSale: true, badges: ["Atmungsaktiv", "Besonders leicht"], tags: ["Für Damen"], image: shoeSpiritLow },
   { name: "EXOTIC LOW SHOE S1PS", price: "€87,95", priceNote: "exkl. MWSt.", tags: ["Besonders breit", "Orthopädisch"], image: shoeExoticLow },
   { name: "PIONEER LOW SHOE S3", price: "€87,95", priceNote: "exkl. MWSt.", badges: ["Wasserdicht"], tags: ["Besonders breit", "Winter"], image: shoePioneerLow },
-  { name: "JOURNEY SHOE S3S", price: "€90,95", priceNote: "exkl. MWSt.", badges: ["Rutschfest", "Besonders leicht"], tags: ["ESD"], image: shoeJourney },
+  { name: "JOURNEY SHOE S3S", price: "€75,95", oldPrice: "€90,95", priceNote: "exkl. MWSt.", onSale: true, badges: ["Rutschfest", "Besonders leicht"], tags: ["ESD"], image: shoeJourney },
   { name: "UNIQUE LOW SHOE S1PS", price: "€84,95", priceNote: "exkl. MWSt.", tags: ["Orthopädisch"], image: shoeUniqueLow },
 ];
 
@@ -211,11 +211,18 @@ const CategoryPage = () => {
                     width={800}
                     height={800}
                   />
-                  {product.isNew && (
-                    <span className="absolute top-3 left-3 px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-primary text-primary-foreground rounded-full">
-                      Neu
-                    </span>
-                  )}
+                  <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                    {product.isNew && (
+                      <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-primary text-primary-foreground rounded-full">
+                        Neu
+                      </span>
+                    )}
+                    {product.onSale && (
+                      <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-destructive text-destructive-foreground rounded-full">
+                        Sale
+                      </span>
+                    )}
+                  </div>
                 </div>
                 <div className="space-y-1.5">
                   <h3 className="font-bold text-sm leading-snug group-hover:text-primary transition-colors">
@@ -223,7 +230,11 @@ const CategoryPage = () => {
                   </h3>
                   <div className="w-6 h-[1px] bg-border" />
                   <p className="text-sm font-semibold text-foreground">
-                    {product.price} <span className="text-[10px] text-muted-foreground font-normal">{product.priceNote}</span>
+                    {product.onSale && product.oldPrice && (
+                      <span className="line-through text-muted-foreground font-normal mr-1.5">{product.oldPrice}</span>
+                    )}
+                    <span className={product.onSale ? "text-destructive" : ""}>{product.price}</span>
+                    {" "}<span className="text-[10px] text-muted-foreground font-normal">{product.priceNote}</span>
                   </p>
                   {product.badges && product.badges.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 pt-1">

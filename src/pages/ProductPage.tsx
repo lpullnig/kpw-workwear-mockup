@@ -1,6 +1,6 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { ArrowRight, ChevronRight, Minus, Plus, Shield, Wind, Feather, Droplets, ChevronDown, Paintbrush, Layers, Sparkles, Wrench } from "lucide-react";
+import { ArrowRight, ChevronRight, Minus, Plus, Shield, Wind, Feather, Droplets, ChevronDown, Paintbrush, Layers, Sparkles, Wrench, CheckCircle2 } from "lucide-react";
 import { useState } from "react";
 
 import b2bImg from "@/assets/b2b-beratung.jpg";
@@ -89,7 +89,7 @@ const ProductPage = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
             {/* Image Gallery */}
             <div className="space-y-4">
-              <div className="aspect-square rounded-xl overflow-hidden bg-card border border-border/50">
+              <div className="relative aspect-square rounded-xl overflow-hidden bg-card border border-border/50">
                 <img
                   src={images[selectedImage]}
                   alt="Fuzzy Low Shoe S1PS"
@@ -97,6 +97,9 @@ const ProductPage = () => {
                   width={1024}
                   height={1024}
                 />
+                <span className="absolute top-4 left-4 px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-destructive text-destructive-foreground rounded-full">
+                  Sale
+                </span>
               </div>
               <div className="grid grid-cols-4 gap-3">
                 {images.map((img, i) => (
@@ -127,8 +130,16 @@ const ProductPage = () => {
 
               <div className="border-t border-border/50 pt-6">
                 <p className="text-3xl font-black text-foreground">
-                  €85,95 <span className="text-sm font-normal text-muted-foreground">exkl. MWSt.</span>
+                  <span className="line-through text-muted-foreground font-normal text-xl mr-2">€99,95</span>
+                  <span className="text-destructive">€85,95</span>
+                  {" "}<span className="text-sm font-normal text-muted-foreground">exkl. MWSt.</span>
                 </p>
+                <div className="flex items-center gap-4 mt-2">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-green-500">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
+                    Auf Lager – Sofort versandbereit
+                  </span>
+                </div>
                 <p className="text-xs text-primary font-semibold mt-1">✓ Versandkostenfrei in ganz Österreich</p>
               </div>
 

@@ -143,20 +143,8 @@ const ProductPage = () => {
                 <p className="text-xs text-primary font-semibold mt-1">✓ Versandkostenfrei in ganz Österreich</p>
               </div>
 
-              {/* Vorteile Icons */}
-              <div className="grid grid-cols-2 gap-2 border-t border-border/50 pt-5">
-                {[
-                  { icon: "↩️", label: "Kostenloser Rückversand" },
-                  { icon: "🚚", label: "Gratis Versand in AT" },
-                  { icon: "🛡️", label: "Sichere Bezahlung" },
-                  { icon: "📞", label: "Persönliche Beratung" },
-                ].map((v) => (
-                  <div key={v.label} className="flex items-center gap-2 text-[11px] text-muted-foreground">
-                    <span className="text-base">{v.icon}</span>
-                    <span>{v.label}</span>
-                  </div>
-                ))}
-              </div>
+
+
 
               {/* Features */}
               <div className="grid grid-cols-2 gap-3">
@@ -225,6 +213,25 @@ const ProductPage = () => {
             </div>
           </div>
         </div>
+
+        {/* Vorteile Icons */}
+        <section className="border-t border-border/50">
+          <div className="container py-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { icon: "↩️", label: "Kostenloser Rückversand" },
+                { icon: "🚚", label: "Gratis Versand in AT" },
+                { icon: "🛡️", label: "Sichere Bezahlung" },
+                { icon: "📞", label: "Persönliche Beratung" },
+              ].map((v) => (
+                <div key={v.label} className="flex items-center gap-3 justify-center text-sm text-muted-foreground">
+                  <span className="text-xl">{v.icon}</span>
+                  <span className="font-semibold">{v.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* Product Description */}
         <section className="border-t border-border/50 bg-card">

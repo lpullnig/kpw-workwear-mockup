@@ -214,6 +214,25 @@ const ProductPage = () => {
           </div>
         </div>
 
+        {/* Vorteile Icons */}
+        <section className="border-t border-border/50">
+          <div className="container py-10">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { icon: "↩️", label: "Kostenloser Rückversand" },
+                { icon: "🚚", label: "Gratis Versand in AT" },
+                { icon: "🛡️", label: "Sichere Bezahlung" },
+                { icon: "📞", label: "Persönliche Beratung" },
+              ].map((v) => (
+                <div key={v.label} className="flex items-center gap-3 justify-center text-sm text-muted-foreground">
+                  <span className="text-xl">{v.icon}</span>
+                  <span className="font-semibold">{v.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Product Description */}
         <section className="border-t border-border/50 bg-card">
           <div className="container py-16 max-w-4xl">
